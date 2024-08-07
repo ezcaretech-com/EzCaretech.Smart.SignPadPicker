@@ -78,7 +78,7 @@ namespace SignPadPicker.Adaptor
 
         public string Activate(SignPadConfig config, Window owner = null)
         {
-            Init(port: config.HttpPort);
+            Init(port: int.Parse(m_HttpPort));
 
             return Sign(config);
         }
@@ -148,7 +148,7 @@ namespace SignPadPicker.Adaptor
             request_msg += CR;                                              // CR
 
             // KSCATApproval 호출
-            int result = KSCATApproval(recv_msg, ip, config.HttpPort, request_msg, request_msg.Length, 0);
+            int result = KSCATApproval(recv_msg, ip, int.Parse(m_HttpPort), request_msg, request_msg.Length, 0);
 
             if (result <= 0)
             {
