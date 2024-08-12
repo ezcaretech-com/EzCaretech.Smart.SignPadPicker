@@ -78,7 +78,8 @@ namespace SignPadPicker.Adaptor
 
         public string Activate(SignPadConfig config, Window owner = null)
         {
-            Init(port: int.Parse(m_HttpPort));
+            //Init(port: int.Parse(m_HttpPort));
+            Init(27015);
 
             return Sign(config);
         }
@@ -105,7 +106,7 @@ namespace SignPadPicker.Adaptor
             request_msg += CR;                                              // CR
 
             // KSCATApproval 호출
-            int result = KSCATApproval(recv_msg, ip, port, request_msg, request_msg.Length, 0);
+            int result = KSCATApproval(recv_msg, ip, 27015, request_msg, request_msg.Length, 0);
 
             if (result <= 0)
             {
@@ -148,7 +149,7 @@ namespace SignPadPicker.Adaptor
             request_msg += CR;                                              // CR
 
             // KSCATApproval 호출
-            int result = KSCATApproval(recv_msg, ip, int.Parse(m_HttpPort), request_msg, request_msg.Length, 0);
+            int result = KSCATApproval(recv_msg, ip, 27015, request_msg, request_msg.Length, 0);
 
             if (result <= 0)
             {
@@ -186,7 +187,7 @@ namespace SignPadPicker.Adaptor
             // 서명패드 PORT가 설정된 ini파일 읽어오기
             if (string.IsNullOrEmpty(retPort.ToString()))
             {
-                GetPrivateProfileString("daemon", "port", m_HttpPort, retPort, 32, IniFile);
+                GetPrivateProfileString("daemon", "port", "27015", retPort, 32, IniFile);
             }
 
             if (string.IsNullOrEmpty(retPort.ToString()))
